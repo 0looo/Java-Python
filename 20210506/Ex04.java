@@ -8,19 +8,19 @@ public class Ex04 {
 		a = 20;
 		System.out.println(a);
 		
-		int b = 10; // ÃÊ±âÈ­
+		int b = 10; // ì´ˆê¸°í™”
 		System.out.println(b);
 		
 		b= 25;
 		System.out.println(b);
 		
 		/*
-		int c ; // initialize µÇÁö ¾ÊÀ½ -> error ¹ß»ı
+		int c ; // initialize ë˜ì§€ ì•ŠìŒ -> error ë°œìƒ
 		System.out.println(c);
 		*/
 		
 		int d;
-		d = 10; // ´ëÀÔ
+		d = 10; // ëŒ€ì…
 		System.out.println(d);
 	}
 }
