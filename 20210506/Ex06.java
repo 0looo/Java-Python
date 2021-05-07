@@ -2,8 +2,8 @@
 public class Ex06 {
 
 	public static void main(String[] args) {
-		// ÀÚ·áÇü : ÀúÀåÇÏ°íÀÚ ÇÏ´Â ¸®ÅÍ³ÎÀÇ type
-		/// ¸®ÅÍ³Î(ÀÚ·áÇü) : Á¤¼ö(int, long), ½Ç¼ö(float, double), ¹®ÀÚ(char), ¹®ÀÚ¿­(String)
+		// ìë£Œí˜• : ì €ì¥í•˜ê³ ì í•˜ëŠ” ë¦¬í„°ë„ì˜ type
+		/// ë¦¬í„°ë„(ìë£Œí˜•) : ì •ìˆ˜(int, long), ì‹¤ìˆ˜(float, double), ë¬¸ì(char), ë¬¸ìì—´(String)
 		
 		int i = 10;
 		System.out.println(i);
@@ -17,8 +17,8 @@ public class Ex06 {
 		String str = "abcd";
 		System.out.println(str);
 		
-		// 4byte ÀÌ»óÀ» ÀúÀåÇÏ±â À§ÇÑ ÀÚ·áÇü : long
-		// ¹üÀ§  : -2147483648 ~ 214748647
+		// 4byte ì´ìƒì„ ì €ì¥í•˜ê¸° ìœ„í•œ ìë£Œí˜• : long
+		// ë²”ìœ„  : -2147483648 ~ 214748647
 		long l1 = 2147493648L;
 		System.out.println(l1);
 		
