@@ -3,7 +3,7 @@
 	## 새로 만들때 체크하면 자동으로 생성됨.
 
 # 단축키
-	import 작성 : ctral + shift + o
+	import 작성 : ctrl + shift + o
 	실행 : alt + shift + x + j
 	System.out.println(); : sysout + ctrl + space
 
@@ -16,6 +16,9 @@
 		## 출력하고자하는 내용작성
 		### ln을 제거하면 \n이 없이 출력가능
 		### 주소를 출력함.(따라서 Array 출력시 별도함수필요)
+	
+	## 유용한 함수
+		arr 출력 : Arrays.deepToString(arr)
 
 #random(랜덤)값 출력
 	Math.random() : 0<x<1 의 범위에서 랜덤추출
@@ -64,8 +67,10 @@
 	## 한번 진행된 후 변수에 적용할 코드 작성
 		ex) 변수를 i로 주었을 경우 i++, i +=2
 		
+	++ for each
 	for(변수type i : 출력변수){ }
 		: 출력변수의 하나씩을 받아서 반복실행
+		: (제한) 1차원형태만 가능.
 
 # 반복문(while)
 	## for와 차이점 :
@@ -92,3 +97,29 @@
 	## 관련함수
 		길이 출력 : 변수명.length
 		
+# Class
+	## 사용시 주의점
+		1. public static void main(String [] args) {}를 사용하면 error
+		2. Class의 첫번째 글자는 대문자로 하는게 좋음.(변수와 구별하기 위해)
+		#### 20210513 Board & Ex10Test######
+		3. 값을 직접대입하는 것이 비효율적이기 때문에 변수작성함.
+		**방법**
+		public void set변수명(자료형 변수명){ 값을넣을변수명 = 변수명;}
+			// 대부분 변수명을 동일하게 하기 때문에 값넣을 변수명 앞에 this. 을 붙혀서씀.
+		4. 값을 불러오는 것 또한 직접값을 가져오지 않음.
+		**방법**
+		public 자료형 get변수명() { return this.변수명;}
+			class 정의시 하단부에 넣음.
+# private
+	private 자료형 변수명;
+	: 내부에서는 사용가능, 외부에서는 사용불가능하게 함.
+	: 은닉함 => 캠슐화
+
+# 생성자
+	public 생성자이름(자료형 변수명, 자료형 변수명 ...){
+	this.변수명 = 변수명;
+	this.변수명 = 변수명;... }
+	## 주의 : 생성자를 작성시 기본생성자 작성해줘야함.
+	## 기본생성자(default 생성자) 형태
+		public Class명(){ }
+	
