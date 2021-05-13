@@ -10,8 +10,8 @@ public class Ex01 {
 		
 		double []d  = {1.2, 2.2};
 		
-		String [] str = {"¹è°íÆÄ", "4½Ã°£³²À½"};
-		String [] str1 = new String [] {"¸ñ¸»¶ó","ÇÏÇÏÇÏ"};
+		String [] str = {"ë°°ê³ íŒŒ", "4ì‹œê°„ë‚¨ìŒ"};
+		String [] str1 = new String [] {"ëª©ë§ë¼","í•˜í•˜í•˜"};
 		String [] str2 = new String[3];
 		str2[0] = "abc";
 		str2[1] = "bbq";
