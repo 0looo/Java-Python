@@ -88,5 +88,7 @@
 		int [] i = new int [4]
 		### 값을 넣지 않을 경우 : 숫자는 0, String은 null
 		
-	## 길이
-		변수명.length
+		
+	## 관련함수
+		길이 출력 : 변수명.length
+		
