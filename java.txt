@@ -1,0 +1,85 @@
+# 기본 시작 형식
+	public static void main(String [] args) { 	}
+	## 새로 만들때 체크하면 자동으로 생성됨.
+
+# 단축키
+	import 작성 : ctral + shift + o
+	실행 : alt + shift + x + j
+	System.out.println(); : sysout + ctrl + space
+
+# error 
+	may not have been initialized
+		: 초기화되지 않음
+
+# 출력
+	System.out.println(##);
+		## 출력하고자하는 내용작성
+		### ln을 제거하면 \n이 없이 출력가능
+		### 주소를 출력함.(따라서 Array 출력시 별도함수필요)
+
+#random(랜덤)값 출력
+	Math.random() : 0<x<1 의 범위에서 랜덤추출
+		##활용 : (int)Math.random*2 => 0,1 중 하나 랜덤 추출
+
+# String 출력 값 비교
+	(java는 출력을 주소로 하기 때문에 주소비교로 들어가므로 별도의 함수가 필요함)
+	변수.equals(##)
+		## 비교할 문장 입력
+
+# 조건식(삼항 연산자)
+	조건식 ? 참인결과 : 거짓결과;
+
+# if 문
+	if(조건문) { 참일때 출력할 값}
+	else if(조건문) {참일때 출력할 값}
+	else {거짓일때 출력할 값}
+
+# switch
+	## 사용시 주의사항
+		1. 조건마다 break; 를 써야한다.(아닐경우 해당 조건 이후로 모두 출력.)
+		2. 조건은 == 에 해당한 값을 갖는다. (범위는 if 사용 추천) 
+		3. default : 이외 값
+		4. equals를 사용하지 않아도 됨.(자동으로 값만 비교)
+	## 사용
+	switch(조건){
+	case 비교값 : 해당조건시 출력값; break;
+	case 비교값 : 해당조건시 출력값; break;
+	default : 해당조건시 출력값; break;
+	}
+
+
+# 입력값 받기
+	import java.util.Scanner;
+	Scanner sc = new Scanner(System.in);
+	받을변수type 변수명 = sc.next##();
+		## 변수type에 맞춰서 적어야함.
+	
+# 반복문 제한
+	: {}를 적지않고 사용가능
+	break : 반복문장을 멈춤.
+	continue : 밑의 내용을 실행하지 않고 반복위로 돌아감.
+
+# 반복문(for)
+	for(변수type 변수; 반복조건; ##){ 반복할 코드 작성 }
+	## 한번 진행된 후 변수에 적용할 코드 작성
+		ex) 변수를 i로 주었을 경우 i++, i +=2
+
+# 반복문(while)
+	## for와 차이점 :
+	    1. 변수를 외부에서 지정
+	    2. 변수 변동(ex i++) 또한 {}안에 적어주거나 break를 사용해서 무한루프방지해야함.
+		--> continue 등 동시 사용시 무한루프에 빠질 수 있으니 앞에 써주는 습관 필요.
+
+	## 형식
+	while(조건문) { 반복출력할 문구 }
+
+  	## do ~ while
+	## 형식
+	do{조건식의 연산결과가 참일때 연산식, 처음 1번은 무조건 실행}
+	while{조건식};
+
+# Array
+	## 생성
+		
+	## 길이
+		변수명.length
