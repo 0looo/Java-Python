@@ -7,6 +7,7 @@ public class Ex11 {
 		sum();
 	}
 
+	// 메소드 오버로딩
 	public static void sum(int start, int end) {
 		int sum = 0;
 		for(int i=start;i<=end;i++) {
