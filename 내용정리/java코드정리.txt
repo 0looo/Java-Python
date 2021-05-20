@@ -16,6 +16,13 @@
 	cannot be assigned
 		: 고정값을 바꾸려할때 발생.(상수를 변경하려할때 발생)
 		: final 이 주어진 함수선언은 상수를 만듬(이후에 수정불가)
+	
+	NullPointerException
+		: null값을 출력함.
+	
+	ClassNotFoundException
+		: Class가 존재하지 않음.
+	
 
 # 출력
 	System.out.println(##);
@@ -77,11 +84,13 @@
 	default : 해당조건시 출력값; break;
 	}
 
-# 입력값 받기
+# 입력값 받기(Scanner)
 	import java.util.Scanner;
 	Scanner sc = new Scanner(System.in);
-	받을변수type 변수명 = sc.next##();
-		## 변수type에 맞춰서 적어야함.
+	받을변수type 변수명 = sc.##();
+		##
+		숫자입력시 : nextInt
+		String입력시 : next
 	
 # 반복문 제한
 	: {}를 적지않고 사용가능
@@ -111,6 +120,11 @@
 	## 형식
 	do{조건식의 연산결과가 참일때 연산식, 처음 1번은 무조건 실행}
 	while{조건식};
+	
+# 예외처리(try)
+	try{실행해볼코드}	** error발생시 error발생 코드 밑으로는 실행하지 않음.
+	catch(error코드 e){error코드 발생시 실행코드}
+	
 
 # Array
 	## 생성(ex)
@@ -146,6 +160,9 @@
 	## 메서드 : 매번 수정해서 사용할 때 생성, 경우마다 다른 값 추출시 사용
 			
 # Class
+	## 관련 함수
+		Class.forName("*")
+			: *란 class존재유무 파악
 	## 구성요소
 		맴버필드 / 생성자(생략시 default 생성자 생성) / 메서드
 		
