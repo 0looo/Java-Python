@@ -7,6 +7,7 @@
 	import 작성 : ctrl + shift + o
 	실행 : alt + shift + x + j
 	System.out.println(); : sysout + ctrl + space
+	Editor, Console 창 변경 : ctrl + F7
 
 # error 
 	may not have been initialized
@@ -22,7 +23,6 @@
 	
 	ClassNotFoundException
 		: Class가 존재하지 않음.
-	
 
 # 출력
 	System.out.println(##);
@@ -58,10 +58,31 @@
 # String 
 	##출력 값 비교
 	(java는 출력을 주소로 하기 때문에 주소비교로 들어가므로 별도의 함수가 필요함)
-	변수.equals(##)
-		## 비교할 문장 입력
+	
+	## 관련함수
+		변수.equals(*)
+			* 비교할 문장 입력
+		변수.charAt(*)
+			* 인덱스 값 넣음
+			: String의 인덱스값 출력(char로 변환)
+		변수.indexOf(*)
+			*에 해당하는 index값을 출력(없을 경우 -1 출력, 여러글자일경우 첫문자의 index 출력)
+		변수.replace("바꿀문장","수정될문자")
+			: String의 일부 수정
+		변수.substring(시작index,시작index+원하는글자수(=끝index+1))
+			: 시작 index ~ 끝index까지 출력  / 시작index만 적을경우 시작부터 끝까지 출력
+		변수.toLowerCase()
+			: 소문자로 변형
+		변수.toUpperCase()
+			: 대문자로 변형
+		String.valueOf(**)
+			: **을 String으로 변경
+		
+				
 	## int => String
 		Integer.toString(int)
+		** null 값을 그냥 출력시 error가 발생하지 않음.
+		** 하지만 toString할경우 error
 
 # 조건식(삼항 연산자)
 	조건식 ? 참인결과 : 거짓결과;
@@ -124,8 +145,16 @@
 # 예외처리(try)
 	try{실행해볼코드}	** error발생시 error발생 코드 밑으로는 실행하지 않음.
 	catch(error코드 e){error코드 발생시 실행코드}
+		** error코드 미설정 : Exception e 넣음
+			: e.printStackTrace();를 {} 넣어서 error출력가능
+			: (추천) e를 변수로 받아서 print하는것이 더 깔끔.
+	finally{무조건 실행할 코드}
 	
-
+		## throws
+			: 메서드의 error를 호출하는 위치에서 발생하는 것으로 표현
+			사용방법
+				method선언 throws error명, error명 { method 내용 }
+	
 # Array
 	## 생성(ex)
 		int [] i = {1,2,3,4};
