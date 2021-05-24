@@ -55,11 +55,17 @@
 	Math.random() : 0<x<1 의 범위에서 랜덤추출
 		##활용 : (int)Math.random*2 => 0,1 중 하나 랜덤 추출
 
+# Int
+	Integer.parseInt(**)
+		: **를 int로 변환
+
 # String 
 	##출력 값 비교
 	(java는 출력을 주소로 하기 때문에 주소비교로 들어가므로 별도의 함수가 필요함)
 	
 	## 관련함수
+		변수.length()
+			: String 길이 출력
 		변수.equals(*)
 			* 비교할 문장 입력
 		변수.charAt(*)
@@ -75,14 +81,41 @@
 			: 소문자로 변형
 		변수.toUpperCase()
 			: 대문자로 변형
+		변수.trim()
+			: 공백문자 제거(좌우동시)
+		변수.split(*)
+			: *을 기준으로 문자열 분리 / 배열로 출력
+			: 기준을 여러개 사용할 경우 | 을 사용.
+		변수.getBytes("변환할문자코드")
+			: 문자열의 형식변환 및 array로 출력(글자마다 해당 코드의 대응되는 숫자로 각각출력)
 		String.valueOf(**)
 			: **을 String으로 변경
-		
 				
 	## int => String
 		Integer.toString(int)
 		** null 값을 그냥 출력시 error가 발생하지 않음.
 		** 하지만 toString할경우 error
+
+# Token
+	: split()보다 빠르지만 활용성이 떨어짐
+	StringTokenizer 변수명 = new StringTokenizer(string변수명,"나눌기준문자");
+		: string으로 나눠서 token으로 출력
+		
+	## 관련함수
+		Token명.countTokens()
+			: token크기 출력(int)
+		Str명.nextToken()
+			: 순서대로 token값 넣어줌.
+		
+	
+# Wrapper
+	: 기본 자료형과의 차이점 == null값을 저장할 수 있음.
+			       == List<자료형> : 자료형 부분에 작성.
+	## 사용(ex)
+		Integer 변수명 = int값; or Integer.parseInt("int변환가능한값") or Integer.valueOf("int변환가능한값")
+		
+	
+		
 
 # 조건식(삼항 연산자)
 	조건식 ? 참인결과 : 거짓결과;
@@ -163,12 +196,58 @@
 		** 값을 넣지 않을 경우 : 숫자는 0, String은 null **
 	
 	## 관련함수
-		길이 출력 : 변수명.length
+		변수명.length
+			: array길이출력
+		Arrays.sort(변수명)
+			: 오름차순으로 정렬
+			: 내림차순 정렬 :: 변수명, Collections.reverseOrder()
+		Arrays.aslist(요소1, 요소2...);
+			: 요소값들을 같은 list 출력
 		
 	## 객체배열
 		Ex01 arr = new Ex01() [2];
 		: 객체 또한 arr로 받을 수 있음.
 
+# List
+	## 생성(ex)
+		List<문자형> list명 = new ArrayList<문자형>();
+	## 관련함수
+		list명.add(*)
+			: 요소추가
+			* 숫자, 넣을문구
+				: 중간에 대입가능(숫자 미기입시 맨뒤로 들어감)
+		list명.remove(*)
+			: *에 해당하는 index 요소제거
+			: *에 해당하는 요소제거(동일한 값이 많을경우 가장 앞의 요소 제거)
+				// 없을 경우에도 error발생하지 않음.
+		list명.size()
+			: 크기출력(int)
+		list명.get(*)
+			: *에 해당하는 index값 출력
+		list명.toString()
+			:String으로 변환(출력시 편함)
+		list명.clear()
+			:list 요소값을 모두 제거.
+
+# Map
+	: python에서 set과 같음.
+	# 생성
+		Map<Key자료형,value자료형> map변수명 = new HashMap<key자료형,value자료형>();
+	# 관련함수
+		map명.put(key,value)
+			: key-value 입력  // 수정도 동일
+		map명.get(key값)
+			: key에 해당하는 value값 출력
+			: key가 없을시 null 출력
+		map명.keySet()
+			: key값 출력(배열로 출력)
+		map명.size()
+			: map 크기출력
+		map명.toString()
+			: {key=value, key=value...} 형태로 출력		
+		map명.containsKey(key값)
+			: key값이 존재시 true, 없을시 false로 출력
+		
 # static
 	: static을 붙히지 않고 class 선언시 => 사용하기 위해서 객체를 생성해서 사용해야함.
 	: 사용할때마다 객체를 생성하지 않기 위해선 static을 붙혀야함.
