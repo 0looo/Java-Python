@@ -1,7 +1,7 @@
 
 public class Ex01 {
 	public static void main(String[] args) {
-		// °ø¹é¹®ÀÚ Á¦°Å  : trim()
+		// Â°Å™Å¡Ã©Å¡Å½Å”Ãš ÃÅšÂ°Ä¹  : trim()
 		String tel1 = "    02";
 		System.out.println(tel1);
 		System.out.println(tel1.trim());
