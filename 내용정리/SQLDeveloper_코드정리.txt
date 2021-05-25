@@ -1,0 +1,21 @@
+# promotion => 대소문자 구별 x
+
+# id 생성
+  create usear user명 IDENTIFIED by passward;
+  
+  ## user 권한부여
+    grant connect, resource, dba to user명;
+  
+# Database 열기
+  select * from database명;
+
+  ## projection(원하는 열 가져옴)
+    select col명, col명... from database명;
+
+  ## selection(원하는 행을 가져옴)
+  
+  
+# DESC
+  DESC database명;
+    : database의 col별 NULL유무, data유형 출력
+  
