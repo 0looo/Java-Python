@@ -1,20 +1,71 @@
-# promotion => 대소문자 구별 x
-
+# 주석 : -- 
+  
+# enter 인식 : X
+# dual : 가상테이블
+  from dual로 작성하여 출력가능
+# String : ' ' 안에 작성
+  
 # id 생성
   create usear user명 IDENTIFIED by passward;
-  
-  ## user 권한부여
-    grant connect, resource, dba to user명;
+    ## system 계정에서만 사용가능
+    ## user 권한부여
+      grant connect, resource, dba to user명;
   
 # Database 열기
   select * from database명;
 
-  ## projection(원하는 열 가져옴)
-    select col명, col명... from database명;
+# projection(원하는 열 가져옴, select)
+  select col명, col명... from database명;
+    ## 대소문자 구별 X
 
-  ## selection(원하는 행을 가져옴)
-  
-  
+  ## 관련함수
+    ## col 이름 변경(as)
+      select col명 as 바꿀col ... from database명;
+        ## as 생략가능
+        ## 공백, 대소문자 구별을 원할경우 ""을 사용   // 비추천 :  java로 넘기면 error
+        
+    ## 단순 계산
+      select col +300, col *12... from database명;
+        ## col에 단순계산 처리가능
+
+    ## 문자열 붙히기 연산자 (||)
+      select col1명|| col2명 from database;
+        : col1_col2 형태로 하나의 col으로 출력
+
+    ## 중복제거(distinct)
+      select distinct col명 from database명
+        ## distinct col1, col2 일경우 col1,col2 모두 중복되는 값을 제거.
+
+
+# selection(원하는 행을 가져옴, where)
+  select col명 from database명 where col 조건
+    : col 중 조건에 해당하는 행
+    ## 조건의 대소문자는 구별함.
+    
+    ## 조건
+      다름 : <> , != , ^= 
+      
+      연도 : 00/00/00, 00-00-00, 00.00.00, 0000.00.00 // 등호비교 = 최근일수록 큼.
+      
+      사이값 : between a and b   // a<=x<=b 값 출력
+      
+      or : in (조건1, 조건2..)  // 조건1 or 조건2 ...
+      
+      포함  : like ' '   // '' 을 포함하는 
+        ** like 관련 식
+          %
+          S% : S로 시작하는 행
+          %k : k로 끝나는 행
+          _
+          _a% : 2번째가 a인 행
+          __b&: 3반째가 b인 행
+          _k%o_: 앞에서 2번째는 k, 뒤에서 2번째는 o
+          // _를 포함조건으로 사용시 => '/_' escape '/'
+      
+      NuLL
+        col is null : col이 null 
+        
+          
 # DESC
   DESC database명;
     : database의 col별 NULL유무, data유형 출력
