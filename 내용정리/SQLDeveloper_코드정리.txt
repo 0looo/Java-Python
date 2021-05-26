@@ -90,8 +90,28 @@
 		: || 와 동일한 결과 출력  // 단점 : 2개만 병합가능.
 	length(col)
 		: data 길이 가져옴	// null은 null로 출력
-	instr(col, '')
-		: col에서 ''에 해당하는 index 출력	// index는 1부터 시작됨	// 없을 경우 0 반환
+	instr(col, str, idx)
+		: idx이후로 col에서 str에 해당하는 index 출력
+			// index는 1부터 시작됨
+			// 없을 경우 0 반환
+	substr(col, 시작index, 글자수)
+		: col 글자 중 시작index~ 글자수 만큼 출력
+			// 시작index가 length보다 클경우 null 
+			// 시작index+글자수 > length => 끝까지만 출력
+			// 글자수 생략시 끝까지 출력
+	replace(col, oldstr, newstr)
+		: oldstr을 newstr로 변경
+			// oldstr이 없을 경우 원본출력
+	trim('str' from col)
+		: 처음과 끝에 있는 str을 삭제
+			// str이 없을 경우 원본 출력
+		: 'str' from 미작성시 col의 좌우 공백제거
+	rpad(col,max_num,str)
+		: max_num의 길이만큼 출력 
+			// max_num > length(col) : str을 부족한만큼 뒤에 붙혀줌
+			// max_num < length(col) : max_num만큼 col 출력
+			
+			
 	
 # DESC
 	DESC database명;
