@@ -79,7 +79,7 @@
 		## col명 대신 col순서로 작성가능	// 1부터 시작함
 			ex) order by 2;(2번째 col기준)
 			
-# col 함수
+# 문자 함수(col으로 사용가능)
 	lower(col)
 		: 소문자로 변경
 	upper(col)
@@ -110,9 +110,42 @@
 		: max_num의 길이만큼 출력 
 			// max_num > length(col) : str을 부족한만큼 뒤에 붙혀줌
 			// max_num < length(col) : max_num만큼 col 출력
-			
-			
-	
+	lpad(col,max_num,str)
+		: rpad와 다르게 부족한 갯수만큼 앞에 str을 붙혀줌
+		
+# 숫자함수
+	round(int,num)
+		: int를 반올림, 기준자리수는 num(0 = 정수출력, 1 = 소수점 첫번째까지 출력)
+	trunc(int, num)
+		: (기준 밑자리에서 버림) 소수점 num자리까지 표시.
+			// default num =0
+	ceil(int)
+		: (올림) 정수표시, 기준자리 표시 불가.
+	floor(int)
+		: 지수만 표시.
+			// trunc와 비교 : int값이 양수면 동일, 음수일경우 floor = trunc -1
+	mod(num1, num2)
+		: num1 / num2 의 나머지
+		: 
+
+# 날짜관련
+	date 연산 : day기준으로 결과 출력
+	sysdate
+		: 오늘 일자 출력 (기본출력 형식 : 00/00/00)
+	months_between(date1, date2)
+		: date2 ~ date1의 기간을 월기준 표시(date1값이 최근값)
+	add_months(date, int)
+		: int만큼 개월수 더해줌.
+	next_day(date,'요일')
+		: date기준으로 다음 요일의 날짜 출력
+			// 요일은 한글로 적어야함.
+	last_day(date)
+		: date 기준 월의 마지막날 출력
+	round(date, ##)
+		## = 'month' : 일기준으로 반올림
+		## = 'year' : 월기준 반올림
+
+
 # DESC
 	DESC database명;
 		: database의 col별 NULL유무, data유형 출력
