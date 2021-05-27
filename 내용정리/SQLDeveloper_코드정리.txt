@@ -4,6 +4,19 @@
 	## dual : 가상테이블
 		from dual로 작성하여 출력가능
   	## 순번은 1부터 시작(java/ python : 0부터)
+	
+	## 전반적인 형식(순서)
+		 select
+		 from
+		 where
+		 group by
+		 having
+		 order by
+	
+# 환경변수 변경
+	alter session set 환경변수 = 변경할 내용;
+		## 환경변수
+			nls_date_format : 날짜 date 출력기본형식 
   
 # id 생성
 	create usear user명 IDENTIFIED by passward;
@@ -72,6 +85,11 @@
 		or : 조건1 or 조건2
 			## and와 or는 and 연산을 먼저 실시
   		not : ex) not in (조건1, 조건2..)
+		
+# group by
+	## 위치 : where 다음
+	## having : group by 결과에 조건필요시 사용
+	
 
 # 정렬
 	order by col, col.. 
@@ -126,7 +144,6 @@
 			// trunc와 비교 : int값이 양수면 동일, 음수일경우 floor = trunc -1
 	mod(num1, num2)
 		: num1 / num2 의 나머지
-		: 
 
 # 날짜관련
 	date 연산 : day기준으로 결과 출력
@@ -145,6 +162,39 @@
 		## = 'month' : 일기준으로 반올림
 		## = 'year' : 월기준 반올림
 
+# 문자형 상호작용
+	to_char(date, 'dd-mm-yy hh24:mi:ss AM')
+		: 날짜형식의 순서변경 가능
+		: date -> string
+	to_char(int, '##999,999,999##')
+		: 숫자 표현형식 변경
+			## 앞 L = 원표시 / $ 사용가능
+			## 뒤 mi : -부호를 뒤로 옮김
+		: int -> string
+	to_date(date형식 string, string의 날짜형식)
+		: string을 날짜형식을 인식해서 date로 변경
+
+# Null (결측값 처리)
+	nvl(col, newval)
+		:col값이 null일 경우 newval로 변경
+
+# case(조건문, if)
+	## 작성위치 : select와 from 사이
+	## 형식
+	case col명 
+		when 조건1 then 조건충족시출력값
+		when 조건2 then ..
+		else 이외출력값 end
+	## col명을 적지않고 조건안에 col을 넣고 비교가능
+	
+# decode(조건문, case)
+	## 작성위치 : select ~ from 사이
+	## 형식
+	decode ( col명(or 식)
+			, 결과1 , 출력값
+			, 결과2 , 출력값...
+			, 이외 출력값)
+			     
 
 # DESC
 	DESC database명;
