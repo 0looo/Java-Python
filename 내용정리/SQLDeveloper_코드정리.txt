@@ -47,11 +47,13 @@
 		select col1명 || col2명 from database;
 			: col1_col2 형태로 하나의 col으로 출력
 
-    ## 중복제거(distinct)
+    	## 중복제거(distinct)
 		select distinct col명 from database명
 			## distinct col1, col2 일경우 col1,col2 모두 중복되는 값을 제거.
-
-
+			
+	##subquery(서브쿼리)
+		where에 (select ~ )을 넣어서 사용시 ()이후를 서브쿼리라함.
+				
 # selection(원하는 행을 가져옴, where)
 	select col명 from database명 where col 조건
 		: col 중 조건에 해당하는 행
@@ -80,17 +82,71 @@
 		NuLL
 			col is null : col이 null 
       
-	## 연산조건
+	## 연산조건 ( and, or, not)
 		and : 조건1 and 조건2
 		or : 조건1 or 조건2
-			## and와 or는 and 연산을 먼저 실시
+		** and와 or는 and 연산을 먼저 실시**	
   		not : ex) not in (조건1, 조건2..)
 		
-# group by
-	## 위치 : where 다음
-	## having : group by 결과에 조건필요시 사용
-	
+# join		
+	# T-SQL JOIN
+		: select **
+			from database1 db1, database2 db2 ...
+			where db1.col = db2.col
+			and 조건1....
 
+		** 동시에 들어가는 col에는 출처.col 으로 적어줘야함.
+
+		# database에 예칭사용가능
+	
+		
+		## outer join
+			1) left outer join
+				: where db1.col = db2.col(+)
+			2) right outer join
+				: where db1.col(+) = db2.col
+			3) fuil outer join
+				: 불가능  => ANSI-JOIN해야함.
+	# ANSI-JOIN
+		: select **
+			from database1 db1 join database db2
+			on db1.col = db2.col
+			where 조건;
+
+			** 동시에 들어가는 col에는 출처.col 으로 적어줘야함.
+			
+		## outer join
+			1) left outer join
+				from database1 db1 left outer join database2 db2 ~
+			2) right outer join
+				from database1 db1 right outer join database2 db2 ~
+			3) fuil outer join
+				from database1 db1 full outer join database2 db2 ~
+
+		##  다중결합
+			select .. 
+			from 공통database db1
+			inner join database db2
+			on db1.col = db2.col
+			inner join database db3
+			on db1.col = db3.col
+
+		== inner 미사용 방법(inner 조인 생략가능)
+			select ..
+			form database1 db1 join database2 db2
+			on db1.col = db2.col
+			join database db3
+			on db1.col = db3.col
+			
+# group by
+	: col별로 avg, min... 을 구하고자 할때 사용
+	
+	select * from database where 조건 group by col명 having 조건;
+		: col에 
+	
+	# having : group by 결과에 조건필요시 사용
+	
+	
 # 정렬
 	order by col, col.. 
 		: default : 오름차순 (col + asc) // 내림차순 설정 : col + desc
