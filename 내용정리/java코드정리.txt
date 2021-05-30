@@ -286,7 +286,7 @@
 		**방법**
 		public 자료형 get변수명() { return this.변수명;}
 			class 정의시 하단부에 넣음.
-			
+		
 # interface
 	## 구성요소
 		상수 / 추상메서드 / default 메서드(java 1.8이후)(정의된 메서드) / static 메서드(java 1.8이후)
