@@ -1,5 +1,7 @@
 # 전반적 사용법
-	## 주석 : -- 
+	## 주석
+		-- : 한줄주석
+		/* .....  */  : 여러줄 주석(...대신 내용 작성)
 	## enter / space 별도인식 X
 	## dual : 가상테이블
 		from dual로 작성하여 출력가능
@@ -17,6 +19,10 @@
 	alter session set 환경변수 = 변경할 내용;
 		## 환경변수
 			nls_date_format : 날짜 date 출력기본형식 
+
+# DESC
+	DESC database명;
+		: database의 col별 NULL유무, data유형 출력
   
 # id 생성
 	create usear user명 IDENTIFIED by passward;
@@ -250,8 +256,36 @@
 			, 결과1 , 출력값
 			, 결과2 , 출력값...
 			, 이외 출력값)
-			     
 
-# DESC
-	DESC database명;
-		: database의 col별 NULL유무, data유형 출력
+# set
+	: 열의 이름은 query1에 의해 결정됨.
+	
+	## 합집합(UNION)
+		query1 union query2
+			: query 1, 2의 결과값 합쳐서 출력
+			** union all : 중복값을 그냥 출력함
+	## 교집합(INTERSECT)
+		query1 union query2
+			: query 1, 2의 결과의 공통값 출력
+	
+	## 차집합(MINUS)
+		query1 MINUS query2
+			: query 1에서 2에 공통으로 들어가 있는 요소를 제외하고 출력
+			
+# Table
+	## 생성
+	create table [로그인ID(생략시 자동으로 로그인된 아이디 인식] table명
+		( column명 datatype [default value])
+# insert (열 삽입)
+	insert into database명(col1, col2...)
+		values (col1값, col2값..)
+	## col 순서에 맞춰서 값이 들어감.
+	## col 미작성시 table생성에 col 순서대로 넣어짐.
+	## values 대신 select col1, col2.. form .. 하여서 넣을 수 있음.
+	
+# update (수정)
+	update database명 set col명 = newvalues where 조건;
+	
+# delete (삭제)
+	delete from database명 where 조건;
+	
