@@ -113,6 +113,19 @@ selection(원하는 행을 가져옴, where)
 	## with check option
 		: 자료를 selection 한 조건에 맞게 값을 넣는지 확인해줌.
 			ex) employee_id= 50 을 불러서 값을 넣을대 employee_id= 40으로 넣을 경우 error발생.
+
+View
+	: 보안문제, 자주사용하는 table 출력을 쉽게 출력
+	
+	생성(create)
+		create view view명 as
+			select col... from table명 where 조건;
+			: select 이하 출력값을 출력
+	삭제(drop)
+		drop view view명;
+	
+	print 방법 
+		: select * from view명;
 		
 join		
 	# T-SQL JOIN
@@ -297,7 +310,11 @@ Table
 	create table [로그인ID(생략시 자동으로 로그인된 아이디 인식] table명
 		( column명 datatype [default value])
 	## copy
-		create table copy_table명 as select * from copy할table;
+		data까지 copy
+			: create table copy_table명 as select * from copy할table;
+		table형식만 copy
+			: create table copy_table명 as select * from copy할table where 1=2;
+				** 1=2 => false
 	
 insert (열 삽입)
 	insert into table명(col1, col2...)
