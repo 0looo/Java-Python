@@ -1,4 +1,4 @@
--- expired ¾ø¾Ú
+-- expired Â¾Ã¸Â¾Ãš
 alter user hr IDENTIFIED by hr;
 
 select * from dba_users;
