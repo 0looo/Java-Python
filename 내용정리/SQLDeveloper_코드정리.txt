@@ -2,10 +2,13 @@
 	## 주석
 		-- : 한줄주석
 		/* .....  */  : 여러줄 주석(...대신 내용 작성)
+	
 	## enter / space 별도인식 X
+	
 	## dual : 가상테이블
 		from dual로 작성하여 출력가능
-  	## 순번은 1부터 시작(java/ python : 0부터)
+  	
+	## 순번은 1부터 시작(java/ python : 0부터)
 	
 	## 전반적인 형식(순서)
 		 select
@@ -14,6 +17,7 @@
 		 group by
 		 having
 		 order by
+		 
 	## 읽기 일괄성
 		: 다른 유저가 일시적으로 변경된 데이터에 영향을 미치지 않게 함.
 		== commit 되지 않은 트렌젝션은 다른 이용자에게 영향을 주지 않음.
@@ -45,10 +49,24 @@ id 생성
 		## user 권한부여
 			grant connect, resource, dba to user명;
   
-table 열기
-	select * from table명;
+table 
+	출력
+		select * from table명;
+	
+	Alter(수정)
+		column 추가(add)
+			alter table table명 add(col명 datatype, col명 datatype [default...])
+		
+		column 설정변경(modify)
+			alter table table명 modify col명 datatype
+		
+		column 삭제(drop)
+			alter table table명 drop column col명;
+				** 삭제는 한개씩밖에 안됨.
+		
 
-String : ' ' 안에 작성
+String
+	: ' ' 안에 작성
 
 projection(원하는 열 가져옴, select)
 	select col명, col명... from table명;
@@ -71,16 +89,20 @@ projection(원하는 열 가져옴, select)
     	## 중복제거(distinct)
 		select distinct col명 from table명
 			## distinct col1, col2 일경우 col1,col2 모두 중복되는 값을 제거.
-			
-	##subquery(서브쿼리)
-		where에 (select ~ )을 넣어서 사용시 ()이후를 서브쿼리라함.
+	
+	## 상위 출력
+		~~ where rownum <= 00;
+		
+subquery(서브쿼리)
+	where에 (select ~ )을 넣어서 사용시 ()이후를 서브쿼리라함.
+	
 				
 selection(원하는 행을 가져옴, where)
 	select col명 from table명 where col 조건
 		: col 중 조건에 해당하는 행
-    	## 조건의 대소문자는 구별함.
-    
-	## 조건
+    	
+	## 조건의 대소문자는 구별함.
+    	** 조건
 		다름 : <> , != , ^= 
       
 		연도 : 00/00/00, 00-00-00, 00.00.00, 0000.00.00 // 등호비교 = 최근일수록 큼.
@@ -127,6 +149,20 @@ View
 	print 방법 
 		: select * from view명;
 		
+	## 수정이 존재하지 않음  --> 재생성
+		create or replace view view명 as
+			select ... 
+		: 재생성됨.
+	
+	## view를 통해 원본table에 insert, delete 등 가능
+		** delete와 같이 생성이외의 기능은 view에서 출력가능할때만 가능.
+		
+		## 제한조건 설정
+			*모든 기능을 출력되는 부분만 가능하게 하는 방법
+				: ~~ (+) with check option [constraint 제한조건명]  ([]은 생략가능)
+			* 모든 기능 제한.
+				: ~~ with read only;
+		
 join		
 	# T-SQL JOIN
 		: select **
@@ -138,7 +174,6 @@ join
 
 		# table에 예칭사용가능
 	
-		
 		## outer join
 			1) left outer join
 				: where tb1.col = tb2.col(+)
@@ -342,6 +377,7 @@ CONSTRAINT(제약조건)
 		FOREIGN KEY(FK)	: 다른 테이블의 col 조회해서 무결성 검사
 				: 다른 테이블의 primary key만 사용가능
 		CHECK		: 조건으로 설정된 값만 허용
+				: check (조건)
 	
 	# 제약조건 설정
 		** table 생성시
@@ -371,4 +407,25 @@ CONSTRAINT(제약조건)
 		(col1 datatype CONSTRAINT 제약조건이름 제약조건...)
 			** 보통 제약조건 이름은 table명_col명_제약조건종류(PK,NN 등..)으로 설정
 			** 보통 NOT NULL 의 경우 이름 설정 하지 않음.
+		
+SEQUENCE
+	: 번호를 붙히기 위해서 사용.
+	CREATE
+		CREATE SEQUENCE sequence명;
+		
+	ALTER
+		alter sequence sequence명
+			요소 = 변경값
+			... ;
+		** start_num 만 수정불가능
+		
+	DROP
+		drop sequence sequence명;
+		
+
+INDEX
+	: where 사용시 검색 속도를 빠르게 해줌.
+	: 출력이 2% ~ 4% 일때에만 효과가 있음(그외는 효과가 없음)
+	: 모든 table에 만들면 오히려 역효과가 발생함.
+		
 		
