@@ -214,4 +214,4 @@ references departments(department_id);
 
 alter table employees
 add constraint emp_department_id_FK foreign key(department_id)
-    reference departments(department_id);
+    references departments(department_id);
