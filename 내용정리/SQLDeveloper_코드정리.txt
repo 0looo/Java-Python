@@ -63,7 +63,6 @@ table
 		column 삭제(drop)
 			alter table table명 drop column col명;
 				** 삭제는 한개씩밖에 안됨.
-		
 
 String
 	: ' ' 안에 작성
@@ -427,5 +426,43 @@ INDEX
 	: where 사용시 검색 속도를 빠르게 해줌.
 	: 출력이 2% ~ 4% 일때에만 효과가 있음(그외는 효과가 없음)
 	: 모든 table에 만들면 오히려 역효과가 발생함.
+	
+windows function
+	: col을 생성하여 조건에 맞는 값들을 새로운 행에 출력
+	: 작성위치 = select 다음 출력할 col 위치
+	ex)
+	select col1, col2 ...[출력할 col들..]
+		rank() over (order by col00 desc) from table명
+	
+	** col자리에 들어가는 함수
+		sum(col명) over (조건)
+			: 조건에 해당하는 부분의 col합
+			** min, max, avg 모두 동일
+				
+		first_value(출력할col명) over (조건)
+			: 조건들의 첫번째 값에 해당하는 row의 출력할 col값 작성
+		last_value(출력할col명) over (조건)
+			: 조건들의 마지막 값에 해당하는 row의 출력할 col값 작성
 		
+		ntile(int) over (조건)
+			: int 만큼 구간을 나눠서 조건에 해당하는 구간에 값을 출력
+			
+		lag(출력col) over (조건)
+			: 출력되는 이전 값을 가져옴 ** 첫번째 출력은 null)
 		
+		LEAD(출력col) over (조건)
+			: 출력되는 다음 값을 가져옴 ** 첫번째 출력은 null)
+		
+		percent_rank() over (조건)
+			: 조건에 해당하는 비율을 출력함
+	
+		** 조건에 들어가는 함수
+			partition by col명
+				: group by와 동일한 효과.
+				
+			rows between 시작위치 and 끝위치
+				: 조건 범위에서 함수 설정
+				** 위치를 나타내는 함수들
+					* unbounded preceding : 첫행
+					* current row : 현재 행
+					* unbounded following : 마지막 행
