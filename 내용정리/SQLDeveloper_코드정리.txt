@@ -398,14 +398,17 @@ CONSTRAINT(제약조건)
 			
 			## foreign
 				foreign key(create_col명) references table명(col명)
-					(+) on delete set null : 부모table이 삭제시 NULL로 대체
-					(+) on delete casede : 부모table이 삭제시 같이 삭제
+					(+) on delete set null : 부모table이 삭제시 NULL로 대체	 // 점선
+					(+) on delete cascade : 부모table이 삭제시 같이 삭제	// 실선
 			
 	# 제약조건 이름 붙히기 (오류시 해당 col을 찾기 편하게 하기 위함)
 		** table 생성시
 		(col1 datatype CONSTRAINT 제약조건이름 제약조건...)
 			** 보통 제약조건 이름은 table명_col명_제약조건종류(PK,NN 등..)으로 설정
 			** 보통 NOT NULL 의 경우 이름 설정 하지 않음.
+		
+	# 삭제
+		alter table table명 drop constraint constraint명;
 		
 SEQUENCE
 	: 번호를 붙히기 위해서 사용.
@@ -420,7 +423,6 @@ SEQUENCE
 		
 	DROP
 		drop sequence sequence명;
-		
 
 INDEX
 	: where 사용시 검색 속도를 빠르게 해줌.
