@@ -349,25 +349,7 @@ Table
 		table형식만 copy
 			: create table copy_table명 as select * from copy할table where 1=2;
 				** 1=2 => false
-	
-insert (열 삽입)
-	insert into table명(col1, col2...)
-		values (col1값, col2값..)
-	## col 순서에 맞춰서 값이 들어감.
-	## col 미작성시 table생성에 col 순서대로 넣어짐.
-	## values 대신 select col1, col2.. form .. 하여서 넣을 수 있음.
-	
-update (수정)
-	update table명 set col명 = newvalues where 조건;
-	
-삭제
-	# delete (삭제)
-		delete from table명 where 조건;
-			** rollback 가능함
-	# TRUNCATE
-		TRUNCATE table table명;
-			** rollback 불가능함.
-
+			
 CONSTRAINT(제약조건)
 	# 종류
 		NOT NULL(NN)	: null값 금지
@@ -379,7 +361,7 @@ CONSTRAINT(제약조건)
 				: check (조건)
 	
 	# 제약조건 설정
-		** table 생성시
+		** table 생성시(비추천 : constraint는 not null 이외에 나머지는 alter로 입력 추천)
 		1. col에 설정 (row level)
 			(col명 datatype 제약조건,
 			...);
@@ -406,9 +388,34 @@ CONSTRAINT(제약조건)
 		(col1 datatype CONSTRAINT 제약조건이름 제약조건...)
 			** 보통 제약조건 이름은 table명_col명_제약조건종류(PK,NN 등..)으로 설정
 			** 보통 NOT NULL 의 경우 이름 설정 하지 않음.
+			
+	# alter(수정)
+		** table 생성시 constraint 넣는 것보다 이후에 alter로 넣는 것이 정확하다.
+		** 순서 : 1. primary key
+			alter table table명
+				add constraint constraint명 primary key(col명,col명..);
+			: 2. 그외 constraint
 		
 	# 삭제
 		alter table table명 drop constraint constraint명;
+	
+insert (열 삽입)
+	insert into table명(col1, col2...)
+		values (col1값, col2값..)
+	## col 순서에 맞춰서 값이 들어감.
+	## col 미작성시 table생성에 col 순서대로 넣어짐.
+	## values 대신 select col1, col2.. form .. 하여서 넣을 수 있음.
+	
+update (수정)
+	update table명 set col명 = newvalues where 조건;
+	
+삭제
+	# delete (삭제)
+		delete from table명 where 조건;
+			** rollback 가능함
+	# TRUNCATE
+		TRUNCATE table table명;
+			** rollback 불가능함.
 		
 SEQUENCE
 	: 번호를 붙히기 위해서 사용.
