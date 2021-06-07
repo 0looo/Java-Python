@@ -395,10 +395,17 @@ CONSTRAINT(제약조건)
 			alter table table명
 				add constraint constraint명 primary key(col명,col명..);
 			: 2. 그외 constraint
+			: foreign
+			alter table table명
+				add aconstraint constrint명 foreign key(col명)
+					references table명(col명);
+				** foreign은 table별로 한개씩해야함.
+				** 실선이라고 해서 on delete cascade가 무조건은 아님. 상관관계 따질 것.
 		
 	# 삭제
-		alter table table명 drop constraint constraint명;
-	
+		alter table table명 drop constraint constraint명 [cascade];
+			** casecade 붙이면 reference도 같이 삭제해버림.
+			
 insert (열 삽입)
 	insert into table명(col1, col2...)
 		values (col1값, col2값..)
