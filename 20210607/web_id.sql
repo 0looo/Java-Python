@@ -141,7 +141,7 @@ add constraint svc_pk primary key(svc_num, mem_no);
 alter table products
 add constraint pro_pk primary key(pro_num, cat_num);
 
--- Ȯ��
+-- È®ÀÎ
 select * from user_constraints where table_name = 'EMPLOYEES';
 select * from dba_cons_columns where constraint_name = 'EMP_PK';
 
