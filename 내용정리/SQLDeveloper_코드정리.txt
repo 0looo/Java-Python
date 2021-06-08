@@ -1,0 +1,484 @@
+전반적 사용법
+	## 주석
+		-- : 한줄주석
+		/* .....  */  : 여러줄 주석(...대신 내용 작성)
+	
+	## enter / space 별도인식 X
+	
+	## dual : 가상테이블
+		from dual로 작성하여 출력가능
+  	
+	## 순번은 1부터 시작(java/ python : 0부터)
+	
+	## 전반적인 형식(순서)
+		 select
+		 from
+		 where
+		 group by
+		 having
+		 order by
+		 
+	## 읽기 일괄성
+		: 다른 유저가 일시적으로 변경된 데이터에 영향을 미치지 않게 함.
+		== commit 되지 않은 트렌젝션은 다른 이용자에게 영향을 주지 않음.
+			** 언두세그먼트 : 일시적으로 가지고 있는 데이터를 갖고 있는 위치
+		
+		## commit
+			: 작성한 트렌젝션을 모든이용자에게 사용할 수 있도록 함.
+				** 트렌젝션 : commit하지 않고 수행하고 있는 단위(일의 단위)
+		### roll back
+			: commit되어 있는 상태로 되돌림.
+			: 일시적인 트렌젝션을 모두 무시함.
+
+환경변수 변경
+	alter session set 환경변수 = 변경할 내용;
+		## 환경변수
+			nls_date_format : 날짜 date 출력기본형식
+Database 설정
+	expired 없애기
+		alter user database명 identified by database명;
+		
+
+DESC
+	DESC table명;
+		: table의 col별 NULL유무, data유형 출력
+  
+id 생성
+	create usear user명 IDENTIFIED by passward;
+		## system 계정에서만 사용가능
+		## user 권한부여
+			grant connect, resource, dba to user명;
+  
+table 
+	출력
+		select * from table명;
+	
+	Alter(수정)
+		column 추가(add)
+			alter table table명 add(col명 datatype, col명 datatype [default...])
+		
+		column 설정변경(modify)
+			alter table table명 modify col명 datatype
+		
+		column 삭제(drop)
+			alter table table명 drop column col명;
+				** 삭제는 한개씩밖에 안됨.
+
+String
+	: ' ' 안에 작성
+
+projection(원하는 열 가져옴, select)
+	select col명, col명... from table명;
+		## 대소문자 구별 X
+
+	## 관련함수
+		## col 이름 변경(as)
+			select col명 as 바꿀col ... from table명;
+        ## as 생략가능
+        ## 공백, 대소문자 구별을 원할경우 ""을 사용   // 비추천 :  java로 넘기면 error
+        
+	## 단순 계산
+		select col +300, col *12... from table명;
+			## col에 단순계산 처리가능
+
+	## 문자열 붙히기 연산자 (||)
+		select col1명 || col2명 from table;
+			: col1_col2 형태로 하나의 col으로 출력
+
+    	## 중복제거(distinct)
+		select distinct col명 from table명
+			## distinct col1, col2 일경우 col1,col2 모두 중복되는 값을 제거.
+	
+	## 상위 출력
+		~~ where rownum <= 00;
+		
+subquery(서브쿼리)
+	where에 (select ~ )을 넣어서 사용시 ()이후를 서브쿼리라함.
+	
+				
+selection(원하는 행을 가져옴, where)
+	select col명 from table명 where col 조건
+		: col 중 조건에 해당하는 행
+    	
+	## 조건의 대소문자는 구별함.
+    	** 조건
+		다름 : <> , != , ^= 
+      
+		연도 : 00/00/00, 00-00-00, 00.00.00, 0000.00.00 // 등호비교 = 최근일수록 큼.
+      
+		사이값 : between a and b   // a<=x<=b 값 출력
+
+		or : in (조건1, 조건2..)  // 조건1 or 조건2 ...
+
+		포함  : like ' '   // '' 을 포함하는
+        	
+		** like 관련 식
+			%
+			S% : S로 시작하는 행
+			%k : k로 끝나는 행
+			_ :
+				_a% : 2번째가 a인 행
+				__b&: 3반째가 b인 행
+				_k%o_: 앞에서 2번째는 k, 뒤에서 2번째는 o
+				// _를 포함조건으로 사용시 => '/_' escape '/'
+
+		NuLL
+			col is null : col이 null 
+      
+	## 연산조건 ( and, or, not)
+		and : 조건1 and 조건2
+		or : 조건1 or 조건2
+		** and와 or는 and 연산을 먼저 실시**	
+  		not : ex) not in (조건1, 조건2..)
+	
+	## with check option
+		: 자료를 selection 한 조건에 맞게 값을 넣는지 확인해줌.
+			ex) employee_id= 50 을 불러서 값을 넣을대 employee_id= 40으로 넣을 경우 error발생.
+
+View
+	: 보안문제, 자주사용하는 table 출력을 쉽게 출력
+	
+	생성(create)
+		create view view명 as
+			select col... from table명 where 조건;
+			: select 이하 출력값을 출력
+	삭제(drop)
+		drop view view명;
+	
+	print 방법 
+		: select * from view명;
+		
+	## 수정이 존재하지 않음  --> 재생성
+		create or replace view view명 as
+			select ... 
+		: 재생성됨.
+	
+	## view를 통해 원본table에 insert, delete 등 가능
+		** delete와 같이 생성이외의 기능은 view에서 출력가능할때만 가능.
+		
+		## 제한조건 설정
+			*모든 기능을 출력되는 부분만 가능하게 하는 방법
+				: ~~ (+) with check option [constraint 제한조건명]  ([]은 생략가능)
+			* 모든 기능 제한.
+				: ~~ with read only;
+		
+join		
+	# T-SQL JOIN
+		: select **
+			from table1 tb1, table2 tb2 ...
+			where tb1.col = tb2.col
+			and 조건1....
+
+		** 동시에 들어가는 col에는 출처.col 으로 적어줘야함.
+
+		# table에 예칭사용가능
+	
+		## outer join
+			1) left outer join
+				: where tb1.col = tb2.col(+)
+			2) right outer join
+				: where tb1.col(+) = tb2.col
+			3) fuil outer join
+				: 불가능  => ANSI-JOIN해야함.
+	# ANSI-JOIN
+		: select **
+			from table1 tb1 join table2 tb2
+			on tb1.col = tb2.col
+			where 조건;
+
+			** 동시에 들어가는 col에는 출처.col 으로 적어줘야함.
+			
+		## outer join
+			1) left outer join
+				from table1 tb1 left outer join table2 tb2 ~
+			2) right outer join
+				from table1 tb1 right outer join table2 tb2 ~
+			3) fuil outer join
+				from table1 tb1 full outer join table2 tb2 ~
+
+		##  다중결합
+			select .. 
+			from 공통table tb1
+			inner join table tb2
+			on tb1.col = tb2.col
+			inner join table tb3
+			on tb1.col = tb3.col
+
+		== inner 미사용 방법(inner 조인 생략가능)
+			select ..
+			form table1 tb1 join table2 tb2
+			on tb1.col = tb2.col
+			join table tb3
+			on tb1.col = tb3.col
+			
+group by
+	: col별로 avg, min... 을 구하고자 할때 사용
+	
+	select * from table where 조건 group by col명 having 조건;
+		: col에 
+	
+	# having : group by 결과에 조건필요시 사용
+	
+	
+정렬
+	order by col, col.. 
+		: default : 오름차순 (col + asc) // 내림차순 설정 : col + desc
+		## col명 대신 col순서로 작성가능	// 1부터 시작함
+			ex) order by 2;(2번째 col기준)
+			
+문자 함수(col으로 사용가능)
+	lower(col)
+		: 소문자로 변경
+	upper(col)
+		: 대문자로 변경
+	initcap(col)
+		: 첫글자만 대문자, 나머지 소문자로 변경(문자가 존재시 문자 다음 첫글자 또한 대문자)
+	concat(col1, col2)
+		: || 와 동일한 결과 출력  // 단점 : 2개만 병합가능.
+	length(col)
+		: data 길이 가져옴	// null은 null로 출력
+	instr(col, str, idx)
+		: idx이후로 col에서 str에 해당하는 index 출력
+			// index는 1부터 시작됨
+			// 없을 경우 0 반환
+	substr(col, 시작index, 글자수)
+		: col 글자 중 시작index~ 글자수 만큼 출력
+			// 시작index가 length보다 클경우 null 
+			// 시작index+글자수 > length => 끝까지만 출력
+			// 글자수 생략시 끝까지 출력
+	replace(col, oldstr, newstr)
+		: oldstr을 newstr로 변경
+			// oldstr이 없을 경우 원본출력
+	trim('str' from col)
+		: 처음과 끝에 있는 str을 삭제
+			// str이 없을 경우 원본 출력
+		: 'str' from 미작성시 col의 좌우 공백제거
+	rpad(col,max_num,str)
+		: max_num의 길이만큼 출력 
+			// max_num > length(col) : str을 부족한만큼 뒤에 붙혀줌
+			// max_num < length(col) : max_num만큼 col 출력
+	lpad(col,max_num,str)
+		: rpad와 다르게 부족한 갯수만큼 앞에 str을 붙혀줌
+		
+숫자함수
+	round(int,num)
+		: int를 반올림, 기준자리수는 num(0 = 정수출력, 1 = 소수점 첫번째까지 출력)
+	trunc(int, num)
+		: (기준 밑자리에서 버림) 소수점 num자리까지 표시.
+			// default num =0
+	ceil(int)
+		: (올림) 정수표시, 기준자리 표시 불가.
+	floor(int)
+		: 지수만 표시.
+			// trunc와 비교 : int값이 양수면 동일, 음수일경우 floor = trunc -1
+	mod(num1, num2)
+		: num1 / num2 의 나머지
+
+날짜관련
+	date 연산 : day기준으로 결과 출력
+	sysdate
+		: 오늘 일자 출력 (기본출력 형식 : 00/00/00)
+	months_between(date1, date2)
+		: date2 ~ date1의 기간을 월기준 표시(date1값이 최근값)
+	add_months(date, int)
+		: int만큼 개월수 더해줌.
+	next_day(date,'요일')
+		: date기준으로 다음 요일의 날짜 출력
+			// 요일은 한글로 적어야함.
+	last_day(date)
+		: date 기준 월의 마지막날 출력
+	round(date, ##)
+		## = 'month' : 일기준으로 반올림
+		## = 'year' : 월기준 반올림
+
+문자형 상호작용
+	to_char(date, 'dd-mm-yy hh24:mi:ss AM')
+		: 날짜형식의 순서변경 가능
+		: date -> string
+	to_char(int, '##999,999,999##')
+		: 숫자 표현형식 변경
+			## 앞 L = 원표시 / $ 사용가능
+			## 뒤 mi : -부호를 뒤로 옮김
+		: int -> string
+	to_date(date형식 string, string의 날짜형식)
+		: string을 날짜형식을 인식해서 date로 변경
+
+Null (결측값 처리)
+	nvl(col, newval)
+		:col값이 null일 경우 newval로 변경
+
+case(조건문, if)
+	## 작성위치 : select와 from 사이
+	## 형식
+	case col명 
+		when 조건1 then 조건충족시출력값
+		when 조건2 then ..
+		else 이외출력값 end
+	## col명을 적지않고 조건안에 col을 넣고 비교가능
+	
+decode(조건문, case)
+	## 작성위치 : select ~ from 사이
+	## 형식
+	decode ( col명(or 식)
+			, 결과1 , 출력값
+			, 결과2 , 출력값...
+			, 이외 출력값)
+
+set
+	: 열의 이름은 query1에 의해 결정됨.
+	
+	## 합집합(UNION)
+		query1 union query2
+			: query 1, 2의 결과값 합쳐서 출력
+			** union all : 중복값을 그냥 출력함
+	## 교집합(INTERSECT)
+		query1 union query2
+			: query 1, 2의 결과의 공통값 출력
+	
+	## 차집합(MINUS)
+		query1 MINUS query2
+			: query 1에서 2에 공통으로 들어가 있는 요소를 제외하고 출력
+			
+Table
+	## 생성
+	create table [로그인ID(생략시 자동으로 로그인된 아이디 인식] table명
+		( column명 datatype [default value])
+	## copy
+		data까지 copy
+			: create table copy_table명 as select * from copy할table;
+		table형식만 copy
+			: create table copy_table명 as select * from copy할table where 1=2;
+				** 1=2 => false
+			
+CONSTRAINT(제약조건)
+	# 종류
+		NOT NULL(NN)	: null값 금지
+		UNIQUE(UU or UK): 중복값 금지
+		PRIMARY KEY(PK)	: null & 중복 금지
+		FOREIGN KEY(FK)	: 다른 테이블의 col 조회해서 무결성 검사
+				: 다른 테이블의 primary key만 사용가능
+		CHECK		: 조건으로 설정된 값만 허용
+				: check (조건)
+	
+	# 제약조건 설정
+		** table 생성시(비추천 : constraint는 not null 이외에 나머지는 alter로 입력 추천)
+		1. col에 설정 (row level)
+			(col명 datatype 제약조건,
+			...);
+			
+			## foreign
+				col명 datatype references table명(col명)		
+					(+) on delete set null : 부모table이 삭제시 NULL로 대체
+					(+) on delete casede : 부모table이 삭제시 같이 삭제
+		
+		2. table에 설정 (table level)
+			(col1 datatyoe...
+			col2 datatype...
+			primary key(col1, col2))
+				** 동시에 여러 col에 제약조건 가능
+				## NOT NULL은 row_level만 가능 / table level 불가능
+			
+			## foreign
+				foreign key(create_col명) references table명(col명)
+					(+) on delete set null : 부모table이 삭제시 NULL로 대체	 // 점선
+					(+) on delete cascade : 부모table이 삭제시 같이 삭제	// 실선
+			
+	# 제약조건 이름 붙히기 (오류시 해당 col을 찾기 편하게 하기 위함)
+		** table 생성시
+		(col1 datatype CONSTRAINT 제약조건이름 제약조건...)
+			** 보통 제약조건 이름은 table명_col명_제약조건종류(PK,NN 등..)으로 설정
+			** 보통 NOT NULL 의 경우 이름 설정 하지 않음.
+			
+	# alter(수정)
+		** table 생성시 constraint 넣는 것보다 이후에 alter로 넣는 것이 정확하다.
+		** 순서 : 1. primary key
+			alter table table명
+				add constraint constraint명 primary key(col명,col명..);
+			: 2. 그외 constraint
+			: foreign
+			alter table table명
+				add aconstraint constrint명 foreign key(col명)
+					references table명(col명);
+				** foreign은 table별로 한개씩해야함.
+				** 실선이라고 해서 on delete cascade가 무조건은 아님. 상관관계 따질 것.
+		
+	# 삭제
+		alter table table명 drop constraint constraint명 [cascade];
+			** casecade 붙이면 reference도 같이 삭제해버림.
+			
+insert (열 삽입)
+	insert into table명(col1, col2...)
+		values (col1값, col2값..)
+	## col 순서에 맞춰서 값이 들어감.
+	## col 미작성시 table생성에 col 순서대로 넣어짐.
+	## values 대신 select col1, col2.. form .. 하여서 넣을 수 있음.
+	
+update (수정)
+	update table명 set col명 = newvalues where 조건;
+	
+삭제
+	# delete (삭제)
+		delete from table명 where 조건;
+			** rollback 가능함
+	# TRUNCATE
+		TRUNCATE table table명;
+			** rollback 불가능함.
+		
+SEQUENCE
+	: 번호를 붙히기 위해서 사용.
+	CREATE
+		CREATE SEQUENCE sequence명;
+		
+	ALTER
+		alter sequence sequence명
+			요소 = 변경값
+			... ;
+		** start_num 만 수정불가능
+		
+	DROP
+		drop sequence sequence명;
+
+INDEX
+	: where 사용시 검색 속도를 빠르게 해줌.
+	: 출력이 2% ~ 4% 일때에만 효과가 있음(그외는 효과가 없음)
+	: 모든 table에 만들면 오히려 역효과가 발생함.
+	
+windows function
+	: col을 생성하여 조건에 맞는 값들을 새로운 행에 출력
+	: 작성위치 = select 다음 출력할 col 위치
+	ex)
+	select col1, col2 ...[출력할 col들..]
+		rank() over (order by col00 desc) from table명
+	
+	** col자리에 들어가는 함수
+		sum(col명) over (조건)
+			: 조건에 해당하는 부분의 col합
+			** min, max, avg 모두 동일
+				
+		first_value(출력할col명) over (조건)
+			: 조건들의 첫번째 값에 해당하는 row의 출력할 col값 작성
+		last_value(출력할col명) over (조건)
+			: 조건들의 마지막 값에 해당하는 row의 출력할 col값 작성
+		
+		ntile(int) over (조건)
+			: int 만큼 구간을 나눠서 조건에 해당하는 구간에 값을 출력
+			
+		lag(출력col) over (조건)
+			: 출력되는 이전 값을 가져옴 ** 첫번째 출력은 null)
+		
+		LEAD(출력col) over (조건)
+			: 출력되는 다음 값을 가져옴 ** 첫번째 출력은 null)
+		
+		percent_rank() over (조건)
+			: 조건에 해당하는 비율을 출력함
+	
+		** 조건에 들어가는 함수
+			partition by col명
+				: group by와 동일한 효과.
+				
+			rows between 시작위치 and 끝위치
+				: 조건 범위에서 함수 설정
+				** 위치를 나타내는 함수들
+					* unbounded preceding : 첫행
+					* current row : 현재 행
+					* unbounded following : 마지막 행
