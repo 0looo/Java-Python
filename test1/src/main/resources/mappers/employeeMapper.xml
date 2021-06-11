@@ -23,7 +23,7 @@
 
 <select id="empAllList" resultType="emp">
 	select <include refid="selectColumn" />
- 	from employees
+ 	from employees order by emp_no
 </select>
 
 <select id="empInfo" parameterType="string" resultType="emp">
@@ -38,5 +38,9 @@
 		SALARY = #{salary}
 	where emp_no = #{empNo}
 </update>
+<delete id="employeeDelete" parameterType="string">
+	delete from employees
+	where emp_no = #{empNo}
+</delete>
 
 </mapper>
