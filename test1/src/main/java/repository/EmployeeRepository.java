@@ -26,4 +26,13 @@ public class EmployeeRepository {
 		return sqlSession.selectList(statement);
 	}
 	
+	public EmployeeDTO empInfo(String empNo) {
+		statement = namespace + ".empInfo";
+		return sqlSession.selectOne(statement, empNo);
+	}
+	
+	public void empUpdate(EmployeeDTO dto) {
+		statement = namespace + ".employeeUpdate";
+		sqlSession.update(statement, dto);
+	}
 }
