@@ -359,6 +359,11 @@ CONSTRAINT(제약조건)
 				: 다른 테이블의 primary key만 사용가능
 		CHECK		: 조건으로 설정된 값만 허용
 				: check (조건)
+				
+	# 조회
+		select * from all_constraints
+		## where table_name = ''; 로 찾음.
+			** 조건이므로 table명 대문자로 작성필요
 	
 	# 제약조건 설정
 		** table 생성시(비추천 : constraint는 not null 이외에 나머지는 alter로 입력 추천)
