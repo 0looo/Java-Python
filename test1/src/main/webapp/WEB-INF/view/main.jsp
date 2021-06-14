@@ -14,7 +14,7 @@
 	<td>
 		<input type="text" name="loninId"/>
 	</td><td rowspan="2">
-		<input type="image" src""/>
+		<input type="image" src = ""/>
 	</td></tr>
 
 <tr><td>비밀번호</td>
@@ -23,14 +23,14 @@
 	</td></tr>
 	
 <tr><td colspan = "3">
-		아이디/비밀번호 찾기
-		<a href ="#">회원가입</a>
+		아이디/비밀번호 찾기 | 
+		<a href ="member/agree">회원가입</a>
 	</td></tr>
 </table>
 
 <!-- 관리자로 로그인 -->
-<a href="emp/empList">직원정보 리스트</a>
-
+<a href="emp/empList">직원정보 리스트</a> <br/>
+<a href="member/memList">회원정보 리스트</a><br/>
 <!-- 일반직원 로그인 -->>
 
 
