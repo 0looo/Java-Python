@@ -12,4 +12,8 @@
 	<bean id="memberInfoService" class="service.member.MemberInfoService" />
 	<bean id="memberModifyService" class="service.member.MemberModifyService" />	
 	<bean id="memberDeleteService" class="service.member.MemberDeleteService" />
+	<bean id="memberDetailService" class="service.member.MemberDetailService" />					
+	<bean id="memberUpdateService" class="service.member.MemberUpdateService" />		
+	<bean id="memberDeleteOkSevice" class="service.member.MemberDeleteOkSevice" />		
+	<bean id="memberPwChangeService" class="service.member.MemberPwChangeService" />
 </beans>

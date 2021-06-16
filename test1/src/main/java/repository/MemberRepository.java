@@ -16,7 +16,10 @@ public class MemberRepository {
 		statement = namespace + ".memberInfo";
 		return sqlSession.selectOne(statement, memId);
 	}
-	
+	public void pwChange(MemberDTO dto) {
+		statement = namespace + ".pwChange";
+		sqlSession.update(statement, dto);
+	}
 	public void memDel(String memId) {
 		statement = namespace + ".memberDelete";
 		sqlSession.delete(statement, memId);

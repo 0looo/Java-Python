@@ -17,6 +17,7 @@ public class MainController {
 	LoginService loginService;
 	@RequestMapping(value = "/main", method=RequestMethod.GET)
 	public String aaaa() {
+
 		return"main";
 	}
 	@RequestMapping(value="/login" ,method = RequestMethod.POST)
